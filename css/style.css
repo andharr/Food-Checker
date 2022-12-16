@@ -19,3 +19,39 @@ img{
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+body {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 1.3rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+img {
+  max-height: 40vh;
+  width: auto;
+}
+
+table {
+  margin: 0 auto;
+}
+
+table, table * {
+  border: 1px solid white;
+}
+
+/* input:invalid {
+  border: 2px solid red;
+} */
+
+input:invalid:focus {
+  background-image: linear-gradient(pink, lightgreen);
+  border: 2px solid red;
+}
+
+span {
+  font-size: .75rem;
+  color: red;
+  /* display: block; */
+}

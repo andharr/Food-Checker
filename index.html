@@ -5,20 +5,36 @@
     	<meta name="description" content="This is where your description goes">
     	<meta name="keywords" content="one, two, three">
 
-		<title>Title in the tab</title>
+		<title>Vegetarian Checker</title>
 
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 	</head>
+
 	<body>
 
-		<h1>Choose an artist</h1>
-		<input type="text" name="" value="">
-		<button type="button" name="button">Get Cocktail</button>
+		<h1>Is it vegetarian?</h1>
+		<label for="barcode">Enter a UPC barcode (12-digits):</label>
 
-		<h2>Name</h2>
-		<img src="" alt="">
+		<input type="number" name="barcode" id="barcode" minlength="12" required>
+		<span class="inputError"></span>
+
+		<button type="button">Search</button>
+
+		<img id="productImg" src="" alt="">
+		<h2 id="productName"></h2>
+		
+		<div class="tableGrid">
+		<table id="ingredients">
+			<tr>
+				<th>Ingredient</th>
+				<th>Vegetarian?</th>
+			</tr>
+		</table>
+		</div>
+
 
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
