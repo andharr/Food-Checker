@@ -1,15 +1,25 @@
 //test barcode = 011110038364
+//another = 041196910759
 
 document.querySelector('button').addEventListener('click', getFetch)
 let inputError = document.querySelector('.inputError')
 let inputBarcode = document.querySelector('#barcode')
 let tableRef = document.querySelector('#ingredients')
+let tableRows = document.querySelectorAll('.tableRows')
 
 
+//// Helper Functions //////
 function clearHTML(item) {
   item.innerHTML = '';
 }
 
+function removeKids(item) {
+  while (item.firstChild) {
+    item.removeChild()
+  }  
+}
+
+///// Fetch Function //////
 function getFetch(){
   const inputVal = document.querySelector('input').value
 
@@ -17,8 +27,6 @@ function getFetch(){
       inputError.innerHTML = 'Please enter 12-digit number'
       return
   }
-
-  clearHTML(inputError)
 
   const url = `https://world.openfoodfacts.org/api/v0/product/${inputVal}.json`
 
@@ -29,7 +37,6 @@ function getFetch(){
 
         //If product found, build new product object
         if (data.status === 1) {
-            clearHTML(tableRef)
             const item = new ProductInfo(data.product)
             item.showInfo()
             item.listIngredients()
@@ -44,6 +51,7 @@ function getFetch(){
       });
 }
 
+////// Product Class ////////
 class ProductInfo {
   constructor(productData) { //passing in data.product
     this.name = productData.product_name
@@ -56,24 +64,33 @@ class ProductInfo {
     document.querySelector('#productName').innerText = this.name
   }
 
-
   ///////  Expanding and populating a table from an array ////////
 
   listIngredients() {
-      for (let key in this.ingredients) {
-        let newRow = tableRef.insertRow(-1)
-        let newIngCell = newRow.insertCell(0)
-        let newVegCell = newRow.insertCell(1)
-        let newIText = document.createTextNode(
-            this.ingredients[key].text
-        )
-        let vegStatus = this.ingredients[key].vegetarian
-        let newVText = document.createTextNode(vegStatus)
-        newIngCell.appendChild(newIText)
-        newVegCell.appendChild(newVText)
-
+      while (tableRef.rows.length > 1) {
+        let i = 1;
+        tableRef.deleteRow(i);
       }
-
+      if (!(this.ingredients == null)) {
+        for (let key in this.ingredients) {
+          let newRow = tableRef.insertRow(-1)
+          let newIngCell = newRow.insertCell(0)
+          let newVegCell = newRow.insertCell(1)
+          let newIText = document.createTextNode(
+              this.ingredients[key].text
+          )
+          let vegStatus = this.ingredients[key].vegetarian ? this.ingredients[key].vegetarian : 'unknown'
+          let newVText = document.createTextNode(vegStatus)
+          newIngCell.appendChild(newIText)
+          newVegCell.appendChild(newVText)
+          if (vegStatus === 'no') {
+            //turn box red
+              newVegCell.classList.add('non-veg')
+          } else if (vegStatus == 'unknown' || vegStatus == 'maybe') {
+            //turn box yellow
+              newVegCell.classList.add('maybe')
+          }
+      }
+    }
   }
-
 }

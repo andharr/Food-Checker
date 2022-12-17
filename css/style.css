@@ -3,22 +3,57 @@
 /*******************************************/
 
 /* Box Model Hack */
-*{
+/* *{
   box-sizing: border-box;
-}
+} */
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-img{
+/* img{
   display: block;
   margin: 0 auto;
-}
+} */
 
 
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  /* hyphens: auto; */
+}
+#root, #__next {
+  isolation: isolate;
+}
+
+/*//////////////////////////////
+//////////////////////////////*/
 
 body {
   background-color: black;
@@ -28,9 +63,21 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.buttonBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+}
+
+.buttonBlock * {
+  flex-grow: 0;
+}
+
 img {
   max-height: 40vh;
   width: auto;
+  margin: 1rem auto;
 }
 
 table {
@@ -39,6 +86,14 @@ table {
 
 table, table * {
   border: 1px solid white;
+}
+
+table th {
+  background-color: #1e40af;
+}
+
+table td {
+  max-width: 400px;
 }
 
 /* input:invalid {
@@ -54,4 +109,14 @@ span {
   font-size: .75rem;
   color: red;
   /* display: block; */
+}
+
+.non-veg {
+  background-color: #be123c;
+  color: black;
+}
+
+.maybe {
+  background-color: #fef08a;
+  color: black;
 }
